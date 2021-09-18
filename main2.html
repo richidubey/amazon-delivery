@@ -24,7 +24,11 @@
     </nav>
 
     <h1>Package tracking</h1>
-    <div id="header"></div>
+    <div id="header">
+      <div class="spinner-border" id="spinner" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
     <script>
       var options = {
         enableHighAccuracy: true,
@@ -56,11 +60,13 @@
             // The write failed...
             // alert("Error in saving data");
             elem.innerHTML = "Please allow location access and turn on GPS";
+            document.getElementById("spinner").style.display="none";
             document.getElementById("header").appendChild(elem);
           } else {
             // Data saved successfully!
 
             elem.innerHTML = "Your order is tracked successfully. Please share this screenshot with the delivery agent.";
+            document.getElementById("spinner").style.display="none";
             document.getElementById("header").appendChild(elem);
           }
         });
@@ -70,6 +76,7 @@
         console.warn(`ERROR(${err.code}): ${err.message}`);
         var elem=document.createElement("p");
         elem.innerHTML = "Please allow location access and turn on GPS";
+        document.getElementById("spinner").style.display="none";
         document.getElementById("header").appendChild(elem);
       }
 
